@@ -1,6 +1,9 @@
 package com.tit.greetingapp.controller;
 
+import com.tit.greetingapp.model.Greeting;
 import com.tit.greetingapp.service.GreetingService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -39,9 +42,22 @@ public class GreetingController {
         return greetingService.getGreetingById(id);
     }
 
+    //UC6 - get all greeting message
     @GetMapping("/all")
     public List<com.tit.greetingapp.model.Greeting> getAllGreetings() {
         return greetingService.getAllGreetings();
+    }
+
+    //UC7- edit greeting message
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateGreeting(@PathVariable Long id, @RequestBody Greeting request) {
+        com.tit.greetingapp.model.Greeting updatedGreeting = greetingService.updateGreeting(id, request.getMessage());
+
+        if (updatedGreeting != null) {
+            return ResponseEntity.ok(updatedGreeting);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Greeting not found!");
+        }
     }
 
     @GetMapping
