@@ -60,6 +60,9 @@ public class GreetingService {
         }
     }
 
+    public boolean deleteGreeting(Long id) {
+        return greetings.remove(id) != null;
+    }
 
 }
 
