@@ -60,6 +60,14 @@ public class GreetingController {
         }
     }
 
+    //UC8 - delete greeting by id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGreeting(@PathVariable Long id) {
+        return greetingService.deleteGreeting(id)
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
     @GetMapping
     public Greeting getGreeting() {
         return new Greeting("Hello, this is a GET request!");
