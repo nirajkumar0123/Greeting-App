@@ -36,5 +36,9 @@ public class GreetingService {
         greetings.put(id, greeting);
         return greeting;
     }
+
+    // UC5 - Retrieve a Greeting by ID
+    public Greeting getGreetingById(Long id) {
+        return greetings.get(id);}
 }
 
