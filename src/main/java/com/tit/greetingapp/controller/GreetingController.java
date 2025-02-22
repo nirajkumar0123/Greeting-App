@@ -1,10 +1,23 @@
 package com.tit.greetingapp.controller;
 
+import com.tit.greetingapp.service.GreetingService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
+
+    private final GreetingService greetingService;
+
+    public GreetingController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+
+    @GetMapping("/service")
+    public Greeting getServiceGreeting() {
+        return new Greeting(greetingService.getGreetingMessage()); // Uses service layer
+    }
+
 
     @GetMapping
     public Greeting getGreeting() {
