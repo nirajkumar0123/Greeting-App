@@ -3,7 +3,9 @@ package com.tit.greetingapp.service;
 import com.tit.greetingapp.model.Greeting;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -40,5 +42,13 @@ public class GreetingService {
     // UC5 - Retrieve a Greeting by ID
     public Greeting getGreetingById(Long id) {
         return greetings.get(id);}
+
+    //UC6 - Get all the greeting message
+
+    public List<Greeting> getAllGreetings() {
+        return new ArrayList<>(greetings.values());
+    }
+
+
 }
 
