@@ -18,6 +18,13 @@ public class GreetingController {
         return new Greeting(greetingService.getGreetingMessage()); // Uses service layer
     }
 
+    // UC3: Personalized Greeting (New Endpoint)
+    @GetMapping("/personalized")
+    public Greeting getPersonalizedGreeting(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName) {
+        return new Greeting(greetingService.getPersonalizedGreeting(firstName, lastName));
+    }
 
     @GetMapping
     public Greeting getGreeting() {
