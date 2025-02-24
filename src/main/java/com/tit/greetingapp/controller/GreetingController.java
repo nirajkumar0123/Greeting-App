@@ -58,6 +58,16 @@ public class GreetingController {
         return ResponseEntity.ok(greetings);
     }
 
+    // UC7 - Edit a Greeting Message
+    @PutMapping("/{id}")
+    public ResponseEntity<Greeting> updateGreeting(@PathVariable Long id, @RequestBody Greeting request) {
+        Greeting updatedGreeting = greetingService.updateGreeting(id, request.getMessage());
+
+        return updatedGreeting != null
+                ? ResponseEntity.ok(updatedGreeting)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
     @GetMapping
     public Greeting getGreeting() {
         return new Greeting("Hello, this is a GET request!");

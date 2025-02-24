@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -53,6 +54,17 @@ public class GreetingService {
     // UC6 - List all Greeting messages from the repository
     public List<Greeting> getAllGreetings() {
         return greetingRepository.findAll();
+    }
+
+    // UC7 - Edit a Greeting Message
+    public Greeting updateGreeting(Long id, String newMessage) {
+        Optional<Greeting> optionalGreeting = greetingRepository.findById(id);
+        if (optionalGreeting.isPresent()) {
+            Greeting greeting = optionalGreeting.get();
+            greeting.setMessage(newMessage);
+            return greetingRepository.save(greeting);
+        }
+        return null; // If greeting with the given ID is not found
     }
 }
 
