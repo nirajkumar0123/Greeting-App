@@ -44,31 +44,5 @@ public class GreetingService {
         Greeting greeting = new Greeting(message);
         return greetingRepository.save(greeting);
     }
-
-    // UC5 - Retrieve a Greeting by ID
-    public Greeting getGreetingById(Long id) {
-        return greetings.get(id);}
-
-    //UC6 - Get all the greeting message
-
-    public List<Greeting> getAllGreetings() {
-        return new ArrayList<>(greetings.values());
-    }
-
-    //UC7 - edit greeting message
-    public Greeting updateGreeting(Long id, String newMessage) {
-        if (greetings.containsKey(id)) {  // Check if the greeting exists
-            Greeting updatedGreeting = new Greeting(id, newMessage);
-            greetings.put(id, updatedGreeting); // Update the message
-            return updatedGreeting;
-        } else {
-            return null;
-        }
-    }
-
-    public boolean deleteGreeting(Long id) {
-        return greetings.remove(id) != null;
-    }
-
 }
 
