@@ -1,6 +1,7 @@
 package com.tit.greetingapp.service;
 
 import com.tit.greetingapp.model.Greeting;
+import com.tit.greetingapp.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +12,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class GreetingService {
+
+    private final GreetingRepository greetingRepository;
+
+    public GreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
+
     public String getGreetingMessage() {
         return "Hello World";
     }
@@ -33,10 +41,8 @@ public class GreetingService {
 
     // UC4 - Save a Greeting message
     public Greeting saveGreeting(String message) {
-        long id = idCounter.incrementAndGet();
-        Greeting greeting = new Greeting(id, message);
-        greetings.put(id, greeting);
-        return greeting;
+        Greeting greeting = new Greeting(message);
+        return greetingRepository.save(greeting);
     }
 
     // UC5 - Retrieve a Greeting by ID

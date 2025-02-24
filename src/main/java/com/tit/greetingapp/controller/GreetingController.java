@@ -31,10 +31,15 @@ public class GreetingController {
     }
 
    // UC4 - Save a Greeting Message
-    @PostMapping("/save")
-    public com.tit.greetingapp.model.Greeting saveGreeting(@RequestBody Greeting request) {
-        return greetingService.saveGreeting(request.getMessage());
-    }
+   @PostMapping("/save")
+   public ResponseEntity<Greeting> saveGreeting(@RequestBody Greeting request) {
+       if (request.getMessage() == null || request.getMessage().trim().isEmpty()) {
+           return ResponseEntity.badRequest().build();
+       }
+       Greeting savedGreeting = greetingService.saveGreeting(request.getMessage());
+       return ResponseEntity.status(HttpStatus.CREATED).body(savedGreeting);
+   }
+
 
     // UC5 - Fetch Greeting by ID
     @GetMapping("/{id}")
@@ -88,19 +93,4 @@ public class GreetingController {
         return new Greeting("Hello, this is a DELETE request!");
     }
 
-    static class Greeting {
-        private String message;
-
-        public Greeting(String message) {
-            this.message = message;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-    }
 }
