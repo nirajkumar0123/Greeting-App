@@ -5,7 +5,6 @@ import com.tit.greetingapp.service.GreetingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/greeting")
@@ -39,6 +38,16 @@ public class GreetingController {
        Greeting savedGreeting = greetingService.saveGreeting(request.getMessage());
        return ResponseEntity.status(HttpStatus.CREATED).body(savedGreeting);
    }
+
+    // UC5 - Get Greeting Message by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Greeting> getGreeting(@PathVariable Long id) {
+        Greeting greeting = greetingService.getGreetingById(id);
+        if (greeting == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(greeting);
+    }
 
 
     @GetMapping

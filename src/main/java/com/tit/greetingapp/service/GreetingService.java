@@ -4,9 +4,8 @@ import com.tit.greetingapp.model.Greeting;
 import com.tit.greetingapp.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -43,6 +42,11 @@ public class GreetingService {
     public Greeting saveGreeting(String message) {
         Greeting greeting = new Greeting(message);
         return greetingRepository.save(greeting);
+    }
+
+    // UC5 - Fetch a Greeting message by ID
+    public Greeting getGreetingById(Long id) {
+        return greetingRepository.findById(id).orElse(null);
     }
 }
 
