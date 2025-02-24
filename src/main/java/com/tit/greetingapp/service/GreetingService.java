@@ -66,5 +66,14 @@ public class GreetingService {
         }
         return null; // If greeting with the given ID is not found
     }
+    // UC8 - deleting greeting using id
+    public boolean deleteGreeting(Long id) {
+        if (greetingRepository.existsById(id)) {
+            greetingRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
 }
 
