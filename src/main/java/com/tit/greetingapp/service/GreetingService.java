@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -47,6 +48,11 @@ public class GreetingService {
     // UC5 - Fetch a Greeting message by ID
     public Greeting getGreetingById(Long id) {
         return greetingRepository.findById(id).orElse(null);
+    }
+
+    // UC6 - List all Greeting messages from the repository
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
     }
 }
 

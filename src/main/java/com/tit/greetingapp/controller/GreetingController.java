@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
@@ -49,6 +51,12 @@ public class GreetingController {
         return ResponseEntity.ok(greeting);
     }
 
+    // UC6 - Get all Greeting messages
+    @GetMapping("/all")
+    public ResponseEntity<List<Greeting>> getAllGreetings() {
+        List<Greeting> greetings = greetingService.getAllGreetings();
+        return ResponseEntity.ok(greetings);
+    }
 
     @GetMapping
     public Greeting getGreeting() {
