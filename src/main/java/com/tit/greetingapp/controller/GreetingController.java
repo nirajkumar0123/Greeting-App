@@ -41,38 +41,6 @@ public class GreetingController {
    }
 
 
-    // UC5 - Fetch Greeting by ID
-    @GetMapping("/{id}")
-    public com.tit.greetingapp.model.Greeting getGreeting(@PathVariable Long id) {
-        return greetingService.getGreetingById(id);
-    }
-
-    //UC6 - get all greeting message
-    @GetMapping("/all")
-    public List<com.tit.greetingapp.model.Greeting> getAllGreetings() {
-        return greetingService.getAllGreetings();
-    }
-
-    //UC7- edit greeting message
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateGreeting(@PathVariable Long id, @RequestBody Greeting request) {
-        com.tit.greetingapp.model.Greeting updatedGreeting = greetingService.updateGreeting(id, request.getMessage());
-
-        if (updatedGreeting != null) {
-            return ResponseEntity.ok(updatedGreeting);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Greeting not found!");
-        }
-    }
-
-    //UC8 - delete greeting by id
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGreeting(@PathVariable Long id) {
-        return greetingService.deleteGreeting(id)
-                ? ResponseEntity.noContent().build()
-                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }
-
     @GetMapping
     public Greeting getGreeting() {
         return new Greeting("Hello, this is a GET request!");
@@ -92,5 +60,4 @@ public class GreetingController {
     public Greeting deleteGreeting() {
         return new Greeting("Hello, this is a DELETE request!");
     }
-
 }
